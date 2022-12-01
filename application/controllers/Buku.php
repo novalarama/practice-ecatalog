@@ -1,7 +1,8 @@
 <?php
 defined('BASEPATH') or exit('No direct script access allowed');
 require_once 'Base_Controller.php';
-class Buku extends Base_Controller{
+class Buku extends Base_Controller
+{
     //field tabel
     var $data = [
         'isbn' => '',
@@ -21,8 +22,12 @@ class Buku extends Base_Controller{
     {
         parent::__construct();
         $this->load->model('penerbit_model', 'penerbit');
+        if (!$this->ion_auth->logged_in()) {
+            redirect('auth/login');
+        }
     }
-    function detail() {
+    function detail()
+    {
         $id = $this->uri->segment(3);
         if ($id) {
             $this->data = $this->buku->find_by_id($id);
@@ -59,12 +64,14 @@ class Buku extends Base_Controller{
         ];
         //handling upload
 
-        if ($_FILES['gambar']['name'] != ""){$config = array(
+        if ($_FILES['gambar']['name'] != "") {
+            $config = array(
                 'upload_path' => "./assets/uploads/",
                 'allowed_types' => "*",
                 'overwrite' => TRUE,
                 'file_name' => "gambar_" . date('YmdHis'),
                 'max_size' => "2048000", // Can be set to particular file size , here it is 2 MB(2048 Kb)
+
             );
             $this->load->library('upload', $config);
             if ($this->upload->do_upload('gambar')) {

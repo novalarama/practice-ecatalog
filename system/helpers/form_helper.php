@@ -237,7 +237,7 @@ if ( ! function_exists('form_input'))
 			'value' => $value
 		);
 
-		return '<input '._parse_form_attributes($data, $defaults)._attributes_to_string($extra)." />\n";
+		return '<input class="form-control"'._parse_form_attributes($data, $defaults)._attributes_to_string($extra)." />\n";
 	}
 }
 
@@ -529,7 +529,7 @@ if ( ! function_exists('form_submit'))
 			'value' => $value
 		);
 
-		return '<input '._parse_form_attributes($data, $defaults)._attributes_to_string($extra)." />\n";
+		return '<input class="btn btn-warning form-control"'._parse_form_attributes($data, $defaults)._attributes_to_string($extra)." />\n";
 	}
 }
 
